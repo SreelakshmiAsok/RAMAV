@@ -1,0 +1,12 @@
+[
+  {"scenario": "safe", "path": "demo-repository/scenarios/safe", "expected_outcome": "AUTO_APPROVE",
+   "notes": "Documentation-only change."},
+  {"scenario": "sql_injection", "path": "demo-repository/scenarios/sql_injection", "expected_outcome": "AUTO_REJECT",
+   "notes": "f-string SQL injection with no adversarial-input test."},
+  {"scenario": "disagreement", "path": "demo-repository/scenarios/disagreement", "expected_outcome": "HUMAN_REVIEW_REQUIRED",
+   "notes": "Clean security/quality scans but a genuinely failing regression test."},
+  {"scenario": "repair", "path": "demo-repository/scenarios/repair", "expected_outcome": "AUTO_REJECT",
+   "notes": "Pre-repair state of a SQL injection PR."},
+  {"scenario": "low_evidence", "path": "demo-repository/scenarios/low_evidence", "expected_outcome": "HUMAN_REVIEW_REQUIRED",
+   "notes": "Unsupported language, no test runner: evidence is thin."}
+]

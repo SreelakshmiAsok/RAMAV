@@ -1,0 +1,10 @@
+# NOT VERIFIED: no Docker daemon was available where this was authored.
+services:
+  ramav:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - RAMAV_PORT=8000

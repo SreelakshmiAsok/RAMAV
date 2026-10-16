@@ -1,0 +1,4 @@
+flask>=3.0
+pytest>=8.0
+semgrep>=1.0
+requests>=2.28

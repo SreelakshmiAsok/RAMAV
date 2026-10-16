@@ -1,0 +1,57 @@
+{
+  "note": "Only 5 illustrative scenarios; not statistically meaningful.",
+  "rows": [
+    {
+      "scenario": "safe",
+      "expected": "AUTO_APPROVE",
+      "baseline_a_static_only": "AUTO_APPROVE",
+      "baseline_b_naive_average": "AUTO_APPROVE",
+      "proposed_ramav": "AUTO_APPROVE"
+    },
+    {
+      "scenario": "sql_injection",
+      "expected": "AUTO_REJECT",
+      "baseline_a_static_only": "AUTO_REJECT",
+      "baseline_b_naive_average": "AUTO_APPROVE",
+      "proposed_ramav": "AUTO_REJECT"
+    },
+    {
+      "scenario": "disagreement",
+      "expected": "HUMAN_REVIEW_REQUIRED",
+      "baseline_a_static_only": "AUTO_APPROVE",
+      "baseline_b_naive_average": "AUTO_APPROVE",
+      "proposed_ramav": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "scenario": "repair",
+      "expected": "AUTO_REJECT",
+      "baseline_a_static_only": "AUTO_REJECT",
+      "baseline_b_naive_average": "AUTO_APPROVE",
+      "proposed_ramav": "AUTO_REJECT"
+    },
+    {
+      "scenario": "low_evidence",
+      "expected": "HUMAN_REVIEW_REQUIRED",
+      "baseline_a_static_only": "AUTO_APPROVE",
+      "baseline_b_naive_average": "AUTO_APPROVE",
+      "proposed_ramav": "HUMAN_REVIEW_REQUIRED"
+    }
+  ],
+  "summary": {
+    "baseline_a_static_only": {
+      "exact_match": 3,
+      "total": 5,
+      "unsafe_auto_approvals": 2
+    },
+    "baseline_b_naive_average": {
+      "exact_match": 1,
+      "total": 5,
+      "unsafe_auto_approvals": 4
+    },
+    "proposed_ramav": {
+      "exact_match": 5,
+      "total": 5,
+      "unsafe_auto_approvals": 0
+    }
+  }
+}

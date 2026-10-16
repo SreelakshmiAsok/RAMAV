@@ -1,0 +1,52 @@
+{
+  "title": "PEAS Formulation — RAMAV",
+  "performance_measure": [
+    "Detection accuracy (true positive rate on known-vulnerable demo PRs)",
+    "False approval rate (AUTO_APPROVE granted to a PR that should not have been)",
+    "False rejection rate (AUTO_REJECT / HUMAN_REVIEW on a genuinely safe PR)",
+    "Decision confidence (the Confidence Engine's output for the final decision)",
+    "Evidence completeness (fraction of relevant evidence collected before deciding)",
+    "Agent agreement (inverse of the number of unresolved disagreements)",
+    "Disagreement detection rate (disagreements correctly identified vs missed)",
+    "Time to decision (wall-clock seconds for one full analysis run)",
+    "Investigation cost (number of investigation actions executed vs budget)",
+    "Percentage of cases safely automated (AUTO_APPROVE + AUTO_REJECT share)",
+    "Percentage escalated to humans (HUMAN_REVIEW_REQUIRED share)"
+  ],
+  "environment": [
+    "Git repository (local clone; the four demo scenarios are real 2-commit git repos)",
+    "GitHub Pull Request (optional; local-clone mode used in this build, see docs/ARCHITECTURE.md)",
+    "Source code under analysis (Python demo repository)",
+    "Test suite (unittest/pytest-style tests, executed for real)",
+    "Dependency manifests (requirements.txt / package.json)",
+    "CI environment (not wired to a live CI provider in this build; documented as an extension point)",
+    "Static-analysis tools (Semgrep when available, deterministic fallback otherwise)",
+    "A changing codebase across commits",
+    "Uncertain / incomplete evidence (tools can be unavailable, tests can be absent)"
+  ],
+  "actuators": [
+    "Invoke an analysis agent (Security / Testing / Quality / Dependency / Performance)",
+    "Run the test suite",
+    "Request evidence from another agent (REQUEST_EVIDENCE message)",
+    "Ask another agent a question (QUESTION / CHALLENGE message)",
+    "Reassess a finding (REASSESS message, updates risk/confidence with an audit trail)",
+    "Generate a repair patch (Repair Agent, narrow rule-based rewrite only)",
+    "Re-run validation against the patched tree",
+    "Approve (AUTO_APPROVE)",
+    "Reject (AUTO_REJECT)",
+    "Escalate to human review (HUMAN_REVIEW_REQUIRED)",
+    "Post a GitHub PR comment (extension point, not wired to a live token in this build)"
+  ],
+  "sensors": [
+    "git diff (via `git diff --name-only <parent>..HEAD`)",
+    "Source files (read from the working tree)",
+    "AST (Python `ast` module, used by Quality and Performance agents)",
+    "Test results (pass/fail/duration from a real unittest/pytest run)",
+    "Static-analysis findings (Semgrep JSON or fallback regex matches)",
+    "Dependency manifests (requirements.txt / package.json contents)",
+    "Performance heuristics (loop/DB-call AST patterns; never a fabricated benchmark)",
+    "Agent messages (the full MessageBus conversation)",
+    "Confidence values (per-finding and overall)",
+    "Disagreements (DisagreementEngine output)"
+  ]
+}
